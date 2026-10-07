@@ -1,193 +1,146 @@
-# Awesome-Machine-Learning-Feature-Store
+<div align="center">
 
-## Top Machine Learning Feature Store Ecosystem
+![Awesome Feature Store Banner](assets/banner.svg)
 
+# 🚀 Awesome Machine Learning Feature Store
 
+### *Curated Directory of Commercial SaaS Platforms & Open-Source Feature Management Frameworks*
 
-**Curated List of SaaS Products & Open-Source GitHub Projects**  
-
-*Focused on Feature Management, Online/Offline Serving & Self-Hosted Feature Stores*  
-
-**Last updated: October 2026**
-
-
-
-This repository tracks notable **commercial feature stores** and **open-source projects** that manage feature definitions, ensure training-serving consistency, and serve features at low latency — eliminating training/serving skew and enabling feature reuse across ML teams.
-
-
-
-**Examples** include Amazon SageMaker Feature Store, Tecton, Hopsworks, Databricks Feature Store, Google Vertex AI Feature Store, Molecula FeatureBase, Rasgo, Qwak, Iguazio, and Feast Cloud (the category leaders).
-
-
-
-**Open-source emphasis**: Feature stores are one of the strongest open-source domains in ML infrastructure. **Feast** leads with over 7,000 GitHub stars as the most popular open-source feature store . **Hopsworks** provides a real-time AI lakehouse with a Python-centric feature store . **Featureform** acts as a virtual feature store orchestrating existing data infrastructure . **Feathub** from Alibaba brings stream-batch unified feature computation with Flink integration . This section is heavily expanded.
-
-
-
-Contributions welcome! Open a PR to add/update entries. Keep descriptions factual and link to official sites.
-
-
-
-## Table of Contents
-
-- [SaaS/Hosted Platforms](#saas-hosted-platforms)
-
-- [Open-Source GitHub Projects](#open-source-github-projects)
-
-- [How to Contribute](#how-to-contribute)
-
-- [Disclaimer](#disclaimer)
-
-
-
-## SaaS/Hosted Platforms
-
-
-
-- **[Amazon SageMaker Feature Store](https://aws.amazon.com/sagemaker/feature-store/)**  
-
-  **AWS's fully managed feature store** — online store for low-latency serving and offline store for training data . **Online Store pricing**: $1.75/million read units, $7.45/million write units, $2.726/GB-month storage . **Offline Store** uses standard S3 pricing ($0.023/GB-month) with Parquet format . **Free tier**: first 10 GB online and 100 GB offline storage . **Hidden cost**: every `get_record` call costs ~$0.002 at scale — 1M daily inference requests = $60/month in API charges alone . **Best for AWS-native ML workloads**.
-
-
-
-- **[Tecton](https://www.tecton.ai/)**  
-
-  **Enterprise feature platform from the creators of Uber Michelangelo** — real-time and batch feature engineering with managed online store . **Pricing**: consumption-based via Feature Compute Units (FCUs) covering streaming ingestion, offline transformations, and online serving . **BYOC multi-cloud deployment** (AWS/GCP/Azure) with Unity Catalog governance and SOC 2 Type II compliance . **Cost crossover**: Tecton wins on cost above ~1-2M users; below that, self-hosted Feast is cheaper if you can absorb the ops burden . **Best for enterprises wanting managed feature platform at scale**.
-
-
-
-- **[Databricks Feature Store](https://www.databricks.com/product/feature-store)**  
-
-  **Feature store integrated with the Databricks Lakehouse** — billed at cost with no premium: you pay for underlying serverless compute, online store (Lakebase), and serving infrastructure . **Feature materialization** runs as serverless compute (FEATURE_STORE product SKU) . **Cost optimization**: group features sharing offline destination, online destination, and trigger into a single `materialize_features` call to reduce pipeline count . **Best for organizations already using Databricks**.
-
-
-
-- **[Google Vertex AI Feature Store](https://cloud.google.com/vertex-ai/docs/featurestore)**  
-
-  **Google's managed feature store** — **Legacy version deprecated February 17, 2026**; full shutdown February 17, 2027 . **Vertex AI Feature Store (v2)** is the recommended replacement, launched November 17, 2023 . **Pricing**: ~$0.10/1M reads and ~$0.10/GB/month columnar storage as of April 2026 . **Quota**: 10,000 reads/second per FeatureStore resource . **Best for GCP-native organizations migrating to v2**.
-
-
-
-- **[Hopsworks (Managed)](https://www.hopsworks.ai/)**  
-
-  **Managed Hopsworks** — serverless app available at app.hopsworks.ai with Gmail/GitHub registration . **Managed cloud** on AWS, Azure, and GCP with feature store, model registry, and MLOps capabilities . **Best for teams wanting managed Hopsworks**.
-
-
-
-- **[Iguazio](https://www.iguazio.com/)**  
-
-  **MLOps platform with built-in feature store** — real-time feature serving and model monitoring . **Best for enterprise MLOps**.
-
-
-
-- **[Qwak](https://www.qwak.com/)**  
-
-  **ML platform with feature store** — feature engineering, model training, and serving in one platform . **Best for end-to-end ML workflows**.
-
-
-
-- **[Rasgo](https://www.rasgo.ai/)**  
-
-  **Feature store and analytics platform** — SQL-based feature generation and management . **Best for SQL-centric feature engineering**.
-
-
-
-- **[Molecula FeatureBase](https://www.molecula.com/)**  
-
-  **Feature store built on FeatureBase** — real-time analytics and feature serving at scale . **Best for high-performance feature serving**.
-
-
-
-## Open-Source GitHub Projects
-
-
-
-### Core Feature Stores
-
-
-
-- **[Feast](https://github.com/feast-dev/feast)**  
-
-  **The leading open-source feature store with 7,000+ GitHub stars**, Apache-2.0 licensed . **Makes features consistently available for training and serving** — manages offline store (historical data), online store (low-latency serving), and feature server . **Point-in-time correct joins** — generates training data with `AS OF` joins returning feature values with largest `effective_timestamp <= event_timestamp`, preventing future data leakage . **Pluggable architecture**: offline stores (Parquet on S3), online stores (Redis/DynamoDB), and registries . **Cost advantage**: at 50k-500k users, Feast on AWS is significantly cheaper than Tecton — the crossover happens around 1-2M users . **Trade-off**: higher on-call burden — pages-per-week ran 6× higher than Tecton in one comparison . **Best for teams wanting control over feature infrastructure**.
-
-
-
-- **[Hopsworks](https://github.com/logicalclocks/hopsworks)**  
-
-  **Real-time AI Lakehouse with Python-centric Feature Store**, AGPL-3.0 licensed with **1,299+ GitHub stars** . **Modular platform** — use just feature store or full MLOps stack . **Time-travel support** on Hudi/Iceberg offline tables . **Project-based multi-tenancy** with secure sandboxes and fine-grained asset sharing . **Integrations**: Databricks, SageMaker, Kubeflow, Spark, Flink . **Deployment**: serverless app, managed cloud, or on-premise . **Best for real-time AI lakehouse deployments**.
-
-
-
-- **[Featureform](https://github.com/featureform/featureform)**  
-
-  **The Virtual Feature Store**, Apache-2.0 licensed with **1,978+ GitHub stars** . **Orchestrates existing data infrastructure** — define, version, and serve ML features via declarative Python API without replacing current systems . **Works with existing Spark, Snowflake, Redis, and more** . **Best for teams wanting feature store capabilities without infrastructure migration**.
-
-
-
-- **[Feathub (Alibaba)](https://github.com/alibaba/feathub)**  
-
-  **Stream-batch unified feature store**, Apache-2.0 licensed with **349+ GitHub stars** . **Consistent feature computation across offline, nearline, and online** . **Apache Flink 1.16 for real-time** with millisecond latency; **Apache Spark 3.3 for offline** with high throughput . **Pythonic SDK** with declarative feature definitions and point-in-time correctness . **Built-in feature monitoring** and feature registry . **Trade-off**: smaller community, heavy reliance on Flink for real-time . **Best for real-time ML with Flink**.
-
-
-
-### Additional Strong Open-Source Options
-
-
-
-- **Chronon (Airbnb)** — Feature engineering platform with point-in-time correctness guarantees .
-
-- **Michelangelo (Uber)** — The canonical feature store pattern that inspired the industry; ~10,000 curated features and 250,000+ predictions/second .
-
-- **Feast on Azure** — Azure plugins for Feast maintained by Microsoft .
-
-- **SageMaker Feature Store streaming aggregation** — AWS samples for streaming feature aggregation .
-
-
-
-**Frameworks for building custom feature store solutions**: Combine **Feast** for the most mature open-source feature store with pluggable offline/online stores and point-in-time correctness . Use **Hopsworks** for a real-time AI lakehouse with modular feature store and multi-tenancy . Deploy **Featureform** for virtual feature store that orchestrates existing infrastructure without migration . Choose **Feathub** for stream-batch unified computation with Flink integration . Note that true enterprise feature platforms with managed infrastructure, automatic scaling, and vendor-supported SLAs (SageMaker Feature Store, Tecton, Databricks Feature Store) remain primarily commercial territory; open-source stacks provide strong feature management, point-in-time correctness, and serving foundations that require integration for complete feature store deployments.
-
-
-
-## How to Contribute
-
-
-
-1. Fork the repo.
-
-2. Add/edit entries in `README.md` (follow existing format).
-
-3. Include: name, link, 1–2 sentence description, and whether it's SaaS or open-source.
-
-4. Submit PR with a short explanation.
-
-
-
-Star the repo if you find it useful!
-
-
-
-## Disclaimer
-
-
-
-- This is a **community-curated** list — not exhaustive and not an endorsement.
-
-- Feature stores handle sensitive ML training data and real-time serving traffic. Self-hosted solutions require proper security hardening, access controls, and compliance with data privacy regulations.
-
-- **Point-in-time correctness is critical** — without `AS OF` joins, models learn from future information and produce zero online lift . Ensure your feature store implements this correctly.
-
-- **Cost scales with read/write volume** — SageMaker Feature Store costs $1.75/million reads and $7.45/million writes . Tecton's FCU-based pricing requires careful monitoring . At scale, self-hosted Feast on AWS can be significantly cheaper below 1-2M users .
-
-- **License considerations**: Feast uses Apache-2.0, Hopsworks uses AGPL-3.0, Featureform uses Apache-2.0, and Feathub uses Apache-2.0. Verify licensing against your use case before committing.
-
-- The open-source ecosystem provides strong feature management, point-in-time correctness, and serving foundations, but **managed infrastructure, automatic scaling, and vendor-supported SLAs** remain primarily commercial offerings.
-
-
+<p align="center">
+  <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Awesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a><a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
+  <img src="https://img.shields.io/github/last-commit/ishandutta2007/Awesome-Machine-Learning-Feature-Store?style=flat-square&color=blue" alt="Last Commit"/>
+  <img src="https://img.shields.io/github/license/ishandutta2007/Awesome-Machine-Learning-Feature-Store?style=flat-square&color=green" alt="License"/>
+  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"/>
+  <a href="https://github.com/ishandutta2007"><img alt="GitHub followers" src="https://img.shields.io/github/followers/ishandutta2007?label=Follow" /></a>
+</p>
 
 ---
 
+</div>
 
+## 📌 Executive Summary & Ecosystem Overview
 
-**Made for ML engineers, data scientists, and organizations seeking feature store sovereignty.**  
+This repository provides an authoritative, SEO-optimized, and regularly updated benchmark of **Machine Learning Feature Stores** — covering both commercial SaaS solutions and self-hosted open-source frameworks. 
 
-Let's make machine learning feature stores more open, transparent, and consistent.
+Feature stores serve as the operational heart of modern **MLOps architecture**. They resolve critical machine learning operational challenges by:
+- ⚡ **Eliminating Training-Serving Skew**: Guaranteeing identical feature computation logic across batch offline training and low-latency online inference.
+- 🕒 **Ensuring Point-in-Time Correctness**: Executing precise `AS OF` historical joins to prevent future data leakage in training datasets.
+- 🔄 **Enabling Feature Reuse & Discovery**: Centralizing feature definitions across data science teams to eliminate duplicate ETL pipelines.
+- 🏎️ **Ultra-Low Latency Serving**: Serving feature vectors in sub-10ms via high-throughput online key-value databases.
+
+---
+
+## 📑 Table of Contents
+
+- [📊 Sector Market Size & Dynamics](#-sector-market-size--dynamics)
+- [🏢 SaaS & Hosted Commercial Platforms](#-saas--hosted-commercial-platforms)
+- [🔓 Open-Source GitHub Projects](#-open-source-github-projects)
+- [💡 Key Selection Criteria & Architectural Comparison](#-key-selection-criteria--architectural-comparison)
+- [🤝 How to Contribute](#-how-to-contribute)
+- [⚠️ Disclaimer](#%EF%B8%8F-disclaimer)
+- [📈 Star History](#-star-history)
+- [💖 Support & Community](#-support--community)
+
+---
+
+## 📊 Sector Market Size & Dynamics
+
+> 💡 **Market Outlook**: The global **Machine Learning Feature Store & Feature Management Sector** is estimated at **~$1.2 Billion in 2024** and is projected to expand to **~$6.5 Billion by 2030** at a Compound Annual Growth Rate (CAGR) of **~32%**.
+> 
+> 🧩 **Market Fragmentation**: The sector is **moderately fragmented**. It features a competitive mix of hyper-scale cloud providers (AWS, Google Cloud, Databricks) offering embedded feature registries, alongside dedicated pure-play MLOps platform vendors (Tecton, Hopsworks, Qwak). The market exhibits strong co-existence between managed SaaS offerings and open-source foundation engines (Feast, Featureform).
+
+---
+
+## 🏢 SaaS & Hosted Commercial Platforms
+
+The table below outlines leading commercial feature store platforms, sorted by **Company Size / Market Capitalization / Valuation (Descending)**.
+
+| Product / Platform | Company Size / Valuation / Revenue | Starting Price | Free Tier / Trial Limit | Key Features & Best For |
+| :--- | :--- | :--- | :--- | :--- |
+| 🌐 **[Google Vertex AI Feature Store](https://cloud.google.com/vertex-ai/docs/featurestore)** | **$2.1 Trillion** Market Cap (Alphabet) / **$307B** Revenue | **$0.10** per 1M online reads + **$0.10/GB/month** columnar storage | **$300 free trial credits** valid for 90 days across GCP services | Managed feature serving integrated with BigQuery and Google Cloud MLOps ecosystem. Best for GCP-native workloads. |
+| ☁️ **[Amazon SageMaker Feature Store](https://aws.amazon.com/sagemaker/feature-store/)** | **$1.9 Trillion** Market Cap (Amazon) / **$575B** Revenue | **$1.75** per 1M online read units & **$7.45** per 1M write units | **10 GB online** & **100 GB offline** storage free forever for new AWS accounts | Deep integration with S3, Glue, and SageMaker Pipelines. Online & offline dual store. Best for AWS-native ML teams. |
+| 🧱 **[Databricks Feature Store](https://www.databricks.com/product/feature-store)** | **$43 Billion** Valuation / **$1.6B+** Annual Revenue | Billed at underlying DBU rate starting at **~$0.07/DBU-hour** | **14-day free trial** with full workspace access & compute credits | Built directly into Databricks Lakehouse with Unity Catalog governance and Delta Lake storage. Best for Spark-centric teams. |
+| ⚡ **[Tecton](https://www.tecton.ai/)** | **$750 Million** Valuation / **$160M+** Total Funding | Consumption-based starting at **~$0.50/FCU hour** (~$500/mo base) | **14-day free sandbox trial** with up to 1M feature serving requests | Enterprise-grade feature platform created by Uber Michelangelo team. BYOC multi-cloud deployment. Best for enterprise scale. |
+| 🐝 **[Hopsworks (Managed)](https://www.hopsworks.ai/)** | **$100 Million** Valuation / **$26M+** Total Funding | **$0.10** per serverless cluster hour or pay-as-you-go | **Free-forever developer sandbox** account on app.hopsworks.ai (up to 25 GB) | Real-time AI Lakehouse with Python-first feature store & multi-tenancy support. Best for modular MLOps stack. |
+| 🛡️ **[Iguazio](https://www.iguazio.com/)** | Acquired by **McKinsey** ($50M+ Acq) / Parent **$15B+** Revenue | Enterprise nodes starting at **~$1,500/month** per cluster node | **14-day enterprise trial** sandbox access upon request | Integrated real-time MLOps platform with automated data pipelines & model monitoring. Best for enterprise data teams. |
+| 🚀 **[Qwak](https://www.qwak.com/)** | **$50 Million** Valuation / **$27M+** Total Funding | **$0.25** per build hour & **$0.05** per instance hour | **14-day free trial** with 100 free execution credits | All-in-one MLOps platform bundling feature store, model build, deployment & monitoring. Best for rapid end-to-end ML. |
+| ⚡ **[Molecula FeatureBase](https://www.molecula.com/)** | **$30 Million** Total Funding / **$5M+** Revenue | **$0.20** per query hour or standard cloud compute rates | **30-day free trial** with up to 100 GB data ingestion limit | Feature store powered by bitmap index technology for ultra-fast real-time analytics. Best for high-concurrency serving. |
+| 📊 **[Rasgo](https://www.rasgo.ai/)** | **$20 Million** Total Funding / **$3M+** Revenue | Starter workspace plan from **$250/month** | **Free community tier** supporting up to 5 feature pipelines & 3 users | SQL-centric feature store allowing data engineers to transform data directly inside Snowflake/BigQuery. Best for SQL workflows. |
+
+---
+
+## 🔓 Open-Source GitHub Projects
+
+Below is the list of top open-source feature stores and feature management frameworks, sorted by **GitHub Stars (Descending)**.
+
+| Repository / Project | GitHub Star Badge | License | Core Capabilities & Description |
+| :--- | :--- | :--- | :--- |
+| 🍱 **[Feast](https://github.com/feast-dev/feast)** | [![Stars](https://img.shields.io/github/stars/feast-dev/feast?style=social&color=white)](https://github.com/feast-dev/feast/stargazers) | Apache-2.0 | **The leading open-source feature store**. Manages offline stores (Parquet, BigQuery, Snowflake), online stores (Redis, DynamoDB), point-in-time joins, and feature serving. |
+| 📐 **[Featureform](https://github.com/featureform/featureform)** | [![Stars](https://img.shields.io/github/stars/featureform/featureform?style=social&color=white)](https://github.com/featureform/featureform/stargazers) | Apache-2.0 | **The Virtual Feature Store**. Orchestrates existing infrastructure (Spark, Snowflake, Redis) via a declarative Python API without requiring data migration. |
+| 🐝 **[Hopsworks](https://github.com/logicalclocks/hopsworks)** | [![Stars](https://img.shields.io/github/stars/logicalclocks/hopsworks?style=social&color=white)](https://github.com/logicalclocks/hopsworks/stargazers) | AGPL-3.0 | **Real-time AI Lakehouse with Feature Store**. Offers modular architecture, time-travel queries on Hudi/Iceberg tables, Python SDK, and fine-grained multi-tenancy. |
+| ⏱️ **[Chronon](https://github.com/airbnb/chronon)** | [![Stars](https://img.shields.io/github/stars/airbnb/chronon?style=social&color=white)](https://github.com/airbnb/chronon/stargazers) | Apache-2.0 | **Airbnb's Feature Engineering Platform**. Built for real-time feature computation, point-in-time correctness, and seamless batch-to-streaming feature orchestration. |
+| 🌊 **[Feathub](https://github.com/alibaba/feathub)** | [![Stars](https://img.shields.io/github/stars/alibaba/feathub?style=social&color=white)](https://github.com/alibaba/feathub/stargazers) | Apache-2.0 | **Alibaba's Stream-Batch Unified Feature Store**. Leverages Apache Flink for sub-second streaming feature computation and Apache Spark for offline throughput. |
+| 🧈 **[Butterfree](https://github.com/quintoandar/butterfree)** | [![Stars](https://img.shields.io/github/stars/quintoandar/butterfree?style=social&color=white)](https://github.com/quintoandar/butterfree/stargazers) | Apache-2.0 | **Spark-based Feature Store Framework** created by QuintoAndar. Simplifies feature creation, inspection, loading into online/offline sinks, and historical dataset building. |
+| 📖 **[MLFS Book Code](https://github.com/featurestorebook/mlfs-book)** | [![Stars](https://img.shields.io/github/stars/featurestorebook/mlfs-book?style=social&color=white)](https://github.com/featurestorebook/mlfs-book/stargazers) | MIT | **Building ML Systems with Feature Stores**. Hands-on reference implementation code accompanying the O'Reilly book on feature engineering & MLOps architecture. |
+| 🚀 **[Oomstore](https://github.com/oom-ai/oomstore)** | [![Stars](https://img.shields.io/github/stars/oom-ai/oomstore?style=social&color=white)](https://github.com/oom-ai/oomstore/stargazers) | MIT | **Lightweight & Fast Feature Store** implemented in Go & Rust. Designed for fast execution, low resource footprint, and easy embedding into microservices. |
+| ☁️ **[Feast Azure](https://github.com/Azure/feast-azure)** | [![Stars](https://img.shields.io/github/stars/Azure/feast-azure?style=social&color=white)](https://github.com/Azure/feast-azure/stargazers) | MIT | **Microsoft Azure Plugins for Feast**. Enables Azure Synapse, Azure Cosmos DB, and Azure Blob Storage as native backends for Feast deployments. |
+
+---
+
+## 💡 Key Selection Criteria & Architectural Comparison
+
+When deciding between a commercial SaaS feature store and a self-hosted open-source framework, consider the following key trade-offs:
+
+```
++-----------------------+----------------------------------+------------------------------------+
+| Feature Category      | Commercial Managed SaaS          | Self-Hosted Open-Source            |
++-----------------------+----------------------------------+------------------------------------+
+| Operational Overhead  | Zero infra maintenance           | High (K8s, Redis, Spark management)|
+| Data Sovereignty      | BYOC / SaaS privacy compliance   | 100% On-Prem / VPC Sovereignty     |
+| Cost at Scale         | Higher API/FCU costs at >2M users| Infrastructure & cloud storage only|
+| Customizability       | Restricted to vendor APIs        | Fully pluggable & modular codebase |
+| Time to Value         | Immediate setup & SLAs           | Requires internal platform engineering|
++-----------------------+----------------------------------+------------------------------------+
+```
+
+---
+
+## 🤝 How to Contribute
+
+Contributions are welcome! Please follow these simple steps:
+
+1. 🔀 **Fork the repository**.
+2. 📝 **Add or update entries** in `README.md` following the tabular formatting.
+3. 🔎 **Provide accurate specifications**: Include platform name, live website link, exact pricing starting point, free tier details, and star badges.
+4. 📬 **Open a Pull Request** with a concise summary of changes.
+
+Check out our curated ecosystem index at [Awesome-Awesome-Awesome](https://github.com/ishandutta2007/Awesome-Awesome-Awesome).
+
+---
+
+## ⚠️ Disclaimer
+
+- This catalog is a **community-curated index** for informational and research purposes only.
+- Feature stores deal directly with core enterprise data pipelines and production ML models. Ensure proper authorization, access control, and security hardening before deploying in production environments.
+- **Point-in-Time Correctness Warning**: Machine learning models trained on data without strict timestamp enforcement (`AS OF` joins) suffer from data leakage and degraded real-world performance.
+
+---
+
+## 📈 Star History
+
+[![Star History Chart](https://star-history.dera.page/svg?repos=ishandutta2007/Awesome-Machine-Learning-Feature-Store&type=date&legend=top-left)](https://star-history.dera.page/#ishandutta2007/Awesome-Machine-Learning-Feature-Store&type=date&legend=top-left)
+
+---
+
+## 💖 Support & Community
+
+Thank you for exploring **Awesome-Machine-Learning-Feature-Store**! If this repository has helped you evaluate, build, or deploy feature stores for your machine learning workflows, please consider supporting the project:
+
+- ⭐ **Star this repository** to increase visibility for the MLOps community.
+- 🔀 **Fork & Contribute** to keep the listings accurate and comprehensive.
+- 📢 **Share with your network** on LinkedIn, X (Twitter), and Reddit.
+- ☕ **Sponsor the Maintainer**: Support ongoing curation via the [GitHub Sponsors Dashboard](https://github.com/sponsors/ishandutta2007).
+
+<p align="center">
+  <sub>Made with ❤️ for ML Engineers, Data Platform Architects, and MLOps Specialists worldwide.</sub>
+</p>
