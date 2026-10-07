@@ -71,9 +71,9 @@ The table below outlines leading commercial feature store platforms, sorted by *
 
 ## 🔓 Open-Source GitHub Projects
 
-Below is the list of top open-source feature stores and feature management frameworks, sorted by **GitHub Stars (Descending)**.
+Below is the list of top open-source feature stores and feature management frameworks, sorted by **GitHub_Stars (Descending)**.
 
-| Repository / Project | GitHub Star Badge | License | Core Capabilities & Description |
+| Repository / Project | GitHub Stars_Badge | License | Core Capabilities & Description |
 | :--- | :--- | :--- | :--- |
 | 🍱 **[Feast](https://github.com/feast-dev/feast)** | [![Stars](https://img.shields.io/github/stars/feast-dev/feast?style=social&color=white)](https://github.com/feast-dev/feast/stargazers) | Apache-2.0 | **The leading open-source feature store**. Manages offline stores (Parquet, BigQuery, Snowflake), online stores (Redis, DynamoDB), point-in-time joins, and feature serving. |
 | 📐 **[Featureform](https://github.com/featureform/featureform)** | [![Stars](https://img.shields.io/github/stars/featureform/featureform?style=social&color=white)](https://github.com/featureform/featureform/stargazers) | Apache-2.0 | **The Virtual Feature Store**. Orchestrates existing infrastructure (Spark, Snowflake, Redis) via a declarative Python API without requiring data migration. |
@@ -111,7 +111,7 @@ Contributions are welcome! Please follow these simple steps:
 
 1. 🔀 **Fork the repository**.
 2. 📝 **Add or update entries** in `README.md` following the tabular formatting.
-3. 🔎 **Provide accurate specifications**: Include platform name, live website link, exact pricing starting point, free tier details, and star badges.
+3. 🔎 **Provide accurate specifications**: Include platform name, live website link, exact pricing starting point, free tier details, and Stars_Badges.
 4. 📬 **Open a Pull Request** with a concise summary of changes.
 
 Check out our curated ecosystem index at [Awesome-Awesome-Awesome](https://github.com/ishandutta2007/Awesome-Awesome-Awesome).
